@@ -1,0 +1,8 @@
+*.swp
+*~
+.*
+#*#
+*.log
+*.tmp
+*.temp
+temp
