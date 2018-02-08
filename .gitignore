@@ -6,3 +6,4 @@
 *.tmp
 *.temp
 temp
+.xuniverse.conf
