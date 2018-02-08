@@ -5,7 +5,7 @@
 # Copyright: 2018
 ####END####
 
-from gi.repository import Gtk,GObject,Gio,GLib
+from gi.repository import Gtk,GObject,Gio,GLib,Gdk,GdkPixbuf
 import sys,os
 import config
 import dialogs,navigator,browser,xgame,data
@@ -16,21 +16,27 @@ class ApplicationWindow(Gtk.ApplicationWindow):
     def __init__(self,application):
         print("1.0")
         Gtk.ApplicationWindow.__init__(self,application=application)
-        self.__builder=Gtk.Builder()
-        self.__vbox=Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        self.builder=Gtk.Builder()
+        self.vbox=Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
 
-        self.add(self.vbox)
+        try:
+            self.toolbox=Gtk.FlowBox()
+            #self.vbox.pack_start(self.toolbox,False,True,0)
+            print("1.1")
+        except:
+            pass
+
+        try:
+            self.hpaned=Gtk.Paned(orientation=Gtk.Orientation.HORIZONTAL)
+            #self.vbox.pack_start(self.hpaned,True,True,0)
+            print("1.2")
+        except:
+            pass
+
+
         self.set_default_size(400,400)
+        self.add(self.vbox)
         self.show_all()
-
-    @GObject.Property
-    def vbox(self):
-        """Vertical Gtk.Box of the Window."""
-        return self.__vbox
-
-    @GObject.Property
-    def builder(self):
-        """Gtk.Builder of the Window"""
 
     def _on_action_quit(self,action,param):
         pass
