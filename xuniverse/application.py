@@ -33,7 +33,6 @@ class ApplicationWindow(Gtk.ApplicationWindow):
         except:
             pass
 
-
         self.set_default_size(400,400)
         self.add(self.vbox)
         self.show_all()
