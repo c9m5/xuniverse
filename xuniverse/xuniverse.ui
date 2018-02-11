@@ -1,7 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.19.0 -->
+<!-- Generated with glade 3.19.0 
+
+Copyright (C) 2018, Christian Moser
+
+This file is part of XUniverse.
+
+XUniverse is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+XUniverse is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with XUniverse.  If not, see <http://www.gnu.org/licenses/>.
+
+Author: Christian Moser
+
+-->
 <interface>
   <requires lib="gtk+" version="3.12"/>
+  <!-- interface-license-type gplv3 -->
+  <!-- interface-name XUniverse -->
+  <!-- interface-description Helps you managing your X3 Game -->
+  <!-- interface-copyright 2018, Christian Moser -->
+  <!-- interface-authors Christian Moser -->
+  <object class="GtkAboutDialog" id="AboutDialog">
+    <property name="can_focus">False</property>
+    <property name="type">popup</property>
+    <property name="title" translatable="yes">X-Universe: About</property>
+    <property name="type_hint">dialog</property>
+    <property name="program_name">X-Universe</property>
+    <property name="version">0.0.0</property>
+    <property name="copyright" translatable="yes">Copyright (C) 2018, Moser Christian.</property>
+    <property name="comments" translatable="yes">X Universe Manager</property>
+    <property name="authors">Christian Moser</property>
+    <property name="translator_credits" translatable="yes">[de] Christian Moser</property>
+    <property name="logo_icon_name">computer</property>
+    <property name="license_type">gpl-3-0</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="AboutDialog-vbox">
+        <property name="can_focus">False</property>
+        <property name="margin_top">6</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="AboutDialog-action_area">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+    </child>
+  </object>
   <object class="GtkMenu" id="ApplicationMenu">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -10,7 +72,6 @@
         <property name="label">gtk-new</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="action_name">app.new</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
       </object>
@@ -26,25 +87,46 @@
         <property name="label">gtk-quit</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="action_name">app.quit</property>
         <property name="use_underline">True</property>
         <property name="use_stock">True</property>
       </object>
     </child>
   </object>
-  <object class="GtkWindow" id="window1">
+  <object class="GtkSizeGroup" id="FirstRunAssistant-sizegroup1">
+    <property name="ignore_hidden">True</property>
+  </object>
+  <object class="GtkListStore" id="FirstRunAssistant.x3ap-executables-liststore"/>
+  <object class="GtkListStore" id="FirstRunAssistant.x3tc-executables-liststore">
+    <columns>
+      <!-- column-name check -->
+      <column type="gboolean"/>
+      <!-- column-name text -->
+      <column type="gchar"/>
+    </columns>
+  </object>
+  <object class="GtkAssistant" id="FirstRunAssistant">
     <property name="can_focus">False</property>
+    <property name="border_width">3</property>
+    <property name="window_position">center</property>
+    <property name="icon_name">applications-games</property>
+    <property name="type_hint">dialog</property>
+    <property name="use_header_bar">0</property>
+    <signal name="apply" handler="on_assistant_apply" swapped="no"/>
+    <signal name="cancel" handler="on_assistant_cancel" swapped="no"/>
+    <signal name="close" handler="on_assistant_close" swapped="no"/>
+    <signal name="escape" handler="on_assistant_escape" swapped="no"/>
+    <signal name="prepare" handler="on_assistant_prepare" swapped="no"/>
     <child>
-      <object class="GtkBox" id="box1">
+      <object class="GtkBox" id="FirstRunAssistant.box0">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
+        <property name="spacing">3</property>
         <child>
-          <object class="GtkToolbar" id="ApplicationToolbar">
+          <object class="GtkImage" id="FirstRunAssistant.image0">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="toolbar_style">both</property>
-            <property name="show_arrow">False</property>
+            <property name="pixbuf">0000005344.600x338.jpg</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -52,7 +134,1400 @@
             <property name="position">0</property>
           </packing>
         </child>
+        <child>
+          <object class="GtkLabel" id="FirstRunAssistant.label0.0">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">&lt;span size='xx-large' weight='bold' foreground='#4A499090D9D9'&gt;X - Universe&lt;/span&gt;</property>
+            <property name="use_markup">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator" id="FirstRunAssistant.separator0.1">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkCheckButton" id="FirstRunAssistant.advanced-options-checkbutton">
+            <property name="label" translatable="yes">Advanced Options</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="xalign">0</property>
+            <property name="draw_indicator">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator" id="FirstRunAssistant.separator0.0">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">4</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="page_type">intro</property>
+        <property name="complete">True</property>
+        <property name="has_padding">False</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="FirstRunAssistant.box1">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">3</property>
+        <child>
+          <object class="GtkImage" id="FirstRunAssistant.image1">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="pixbuf">0000005346.600x338.jpg</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="FirstRunAssistant.label1.0">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="ypad">2</property>
+            <property name="label" translatable="yes">&lt;span size='x-large'&gt;&lt;span foreground='#4A90D9' weight='bold'&gt;X&lt;/span&gt; - Games to support.&lt;/span&gt;
+
+&lt;b&gt;NOTE:&lt;/b&gt;This can later be changed in &lt;b&gt;&lt;i&gt;Preferences&lt;/i&gt;&lt;/b&gt;!</property>
+            <property name="use_markup">True</property>
+            <property name="justify">fill</property>
+            <property name="xalign">0</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator" id="FirstRunAssistant.separator1.1">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkCheckButton" id="FirstRunAssistant.x3tc-checkbutton">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="xalign">0</property>
+            <property name="active">True</property>
+            <property name="draw_indicator">True</property>
+            <child>
+              <object class="GtkLabel" id="FirstRunAssistant.label1.1">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Add  &lt;span weight='bold' foreground='#4A90D9'&gt;X3 - Terran Conflict&lt;/span&gt;.</property>
+                <property name="use_markup">True</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkCheckButton" id="FirstRunAssistant.x3ap-checkbutton">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="xalign">0</property>
+            <property name="active">True</property>
+            <property name="draw_indicator">True</property>
+            <child>
+              <object class="GtkLabel" id="FirstRunAssistant.label1.2">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Add  &lt;span weight='bold' foreground='#4A90D9'&gt;X3 - Albion Prelude&lt;/span&gt;.</property>
+                <property name="use_markup">True</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">4</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator" id="FirstRunAssistant.separator1.0">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">5</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="complete">True</property>
+        <property name="has_padding">False</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="FirstRunAssistant.box2">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">3</property>
+        <child>
+          <object class="GtkLabel" id="FirstRunAssistant.label2.0">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="hexpand">True</property>
+            <property name="ypad">2</property>
+            <property name="label" translatable="yes">&lt;span size='xx-large' weight='bold' background='#4A90D9' foreground='white'&gt;X3 - Terran Conflict Executables&lt;/span&gt;</property>
+            <property name="use_markup">True</property>
+            <property name="justify">center</property>
+            <property name="ellipsize">start</property>
+            <property name="xalign">0</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="FirstRunAssistant.label2.1">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="ypad">2</property>
+            <property name="label" translatable="yes">&lt;span size='large'&gt;Please add &lt;span color='blue' weight='bold'&gt;X3 - Terran Conflict&lt;/span&gt; executables.&lt;/span&gt;</property>
+            <property name="use_markup">True</property>
+            <property name="xalign">0</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator" id="separator3">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox" id="FirstRunAssistant.box2.1">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <child>
+              <object class="GtkToolbar" id="FirstRunAssistant.x3tc-executables-toolbar">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="show_arrow">False</property>
+                <property name="icon_size">2</property>
+                <child>
+                  <object class="GtkToolButton" id="FirstRunAssistant.x3tc-executables-add-toolbutton">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">toolbutton1</property>
+                    <property name="use_underline">True</property>
+                    <property name="stock_id">gtk-add</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="homogeneous">True</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkToolButton" id="FirstRunAssistant.x3tc-edit-toolbutton">
+                    <property name="visible">True</property>
+                    <property name="sensitive">False</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">toolbutton2</property>
+                    <property name="use_underline">True</property>
+                    <property name="stock_id">gtk-edit</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="homogeneous">True</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkToolButton" id="FirstRunAssistant.x3tc-remove-toolbutton">
+                    <property name="visible">True</property>
+                    <property name="sensitive">False</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">toolbutton3</property>
+                    <property name="use_underline">True</property>
+                    <property name="stock_id">gtk-remove</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="homogeneous">True</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="pack_type">end</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow" id="FirstRunAssistant.x3tc-executables-scrolledwindow">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="shadow_type">in</property>
+            <child>
+              <object class="GtkTreeView" id="x3tc-treeview">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="model">FirstRunAssistant.x3tc-executables-liststore</property>
+                <child internal-child="selection">
+                  <object class="GtkTreeSelection" id="x3tc-treeview-selection"/>
+                </child>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">4</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator" id="separator12">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">5</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="complete">True</property>
+        <property name="has_padding">False</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="FirstRunAssistant.box3">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">3</property>
+        <child>
+          <object class="GtkImage" id="image3">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="pixbuf">ss_3fea48556c82b8878da6c08d9a129a9aba5dded1.600x338.jpg</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label3">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">&lt;span size='large'&gt;&lt;span weight='bold' foreground='#4A90D9'&gt;X3 - Terran Conflict&lt;/span&gt; Savegame Directories&lt;/span&gt;</property>
+            <property name="use_markup">True</property>
+            <property name="xalign">0</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator" id="separator17">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator" id="separator16">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox" id="box10">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="spacing">6</property>
+            <child>
+              <object class="GtkCheckButton" id="FirstRunAssistant.x3tc-savegames-checkbutton">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="xalign">0</property>
+                <property name="draw_indicator">True</property>
+                <child>
+                  <object class="GtkLabel" id="label17">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Manage &lt;span weight='bold' foreground='#4A90D9'&gt;X3 - Terran Conflict&lt;/span&gt; savegames.</property>
+                    <property name="use_markup">True</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkCheckButton" id="checkbutton1">
+                <property name="label" translatable="yes">Backup Savegames</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="xalign">0</property>
+                <property name="draw_indicator">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">4</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator" id="separator18">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="padding">2</property>
+            <property name="position">5</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkGrid" id="grid3">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <child>
+              <object class="GtkLabel" id="label11">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Savegames Directory: </property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label12">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Work Direktory:</property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label21">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Backup Directory:</property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkFileChooserButton" id="FirstRunAssistant.x3tc-backupdir-filechooserbutton">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkFileChooserButton" id="FirstRunAssistant.x3tc-workdir-filechooserbutton">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkFileChooserButton" id="FirstRunAssistant.x3tc-savegamesdir-filechooserbutton">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="hexpand">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">6</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="complete">True</property>
+        <property name="has_padding">False</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="FirstRunAssistant.box4">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">3</property>
+        <child>
+          <object class="GtkLabel" id="label8">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="ypad">2</property>
+            <property name="label" translatable="yes">&lt;span foreground='white' background='#4A90D9' size='xx-large' weight='bold'&gt;X3 - Albion Prelude Executables&lt;/span&gt;</property>
+            <property name="use_markup">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label5">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="ypad">2</property>
+            <property name="label" translatable="yes">&lt;span size='large'&gt;Please add &lt;span color='blue' weight='bold'&gt;X3 - Albion Prelude&lt;/span&gt; executables.&lt;/span&gt;</property>
+            <property name="use_markup">True</property>
+            <property name="xalign">0</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator" id="separator1">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox" id="box7">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <child>
+              <object class="GtkToolbar" id="FirstRunAssistant.x3ap-toolbar">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="show_arrow">False</property>
+                <property name="icon_size">2</property>
+                <child>
+                  <object class="GtkToolButton" id="FirstRunAssistant.x3ap-add-toolbutton">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">toolbutton1</property>
+                    <property name="use_underline">True</property>
+                    <property name="stock_id">gtk-add</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="homogeneous">True</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkToolButton" id="FirstRunAssistant.x3ap-edit-toolbutton">
+                    <property name="visible">True</property>
+                    <property name="sensitive">False</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">toolbutton2</property>
+                    <property name="use_underline">True</property>
+                    <property name="stock_id">gtk-edit</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="homogeneous">True</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkToolButton" id="FirstRunAssistant.x3ap-remove-toolbutton">
+                    <property name="visible">True</property>
+                    <property name="sensitive">False</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">toolbutton3</property>
+                    <property name="use_underline">True</property>
+                    <property name="stock_id">gtk-remove</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="homogeneous">True</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="pack_type">end</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow" id="FirstRunAssistant.x3ap-scrolledwindow">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="shadow_type">in</property>
+            <child>
+              <object class="GtkTreeView" id="FirstRunAssistant.x3ap-treeview">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="model">FirstRunAssistant.x3ap-executables-liststore</property>
+                <property name="search_column">0</property>
+                <child internal-child="selection">
+                  <object class="GtkTreeSelection" id="FirstRunAssistant.x3ap-treeview-selection"/>
+                </child>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">4</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator" id="separator13">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">5</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="complete">True</property>
+        <property name="has_padding">False</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="FirstRunAssistant.box5">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">3</property>
+        <child>
+          <object class="GtkImage" id="image4">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="pixbuf">ss_8f83ffbfc4ce78168430451a788e11712260029b.600x338.jpg</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator" id="separator20">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label23">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">&lt;span size='large'&gt;&lt;span weight='bold' foreground='#4A90D9'&gt;X3 - Albion Prelude&lt;/span&gt; savegames&lt;/span&gt;</property>
+            <property name="use_markup">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator" id="separator19">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox" id="box12">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="spacing">8</property>
+            <child>
+              <object class="GtkCheckButton" id="FirstRunAssistant.x3ap-manage-savegames-checkbutton">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="xalign">0</property>
+                <property name="draw_indicator">True</property>
+                <child>
+                  <object class="GtkLabel" id="label18">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Manage &lt;span weight='bold' foreground='#4A90D9'&gt;X3 - Albion Prelude&lt;/span&gt; savegames.</property>
+                    <property name="use_markup">True</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkCheckButton" id="FirstRunAssistant.x3ap-backup-savegames.checkbutton">
+                <property name="label" translatable="yes">Backup Savegames</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="xalign">0</property>
+                <property name="draw_indicator">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">4</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator" id="separator21">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">5</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkGrid" id="grid4">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <child>
+              <object class="GtkLabel" id="label15">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Savegames Directory:</property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label16">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Work Directory:</property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label22">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Backup Directory:</property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkFileChooserButton" id="FirstRunAssistant.x3ap-savegamesdir-filechooserbutton">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="hexpand">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkFileChooserButton" id="FirstRunAssistant.x3ap-workdir-filechooserbutton">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="hexpand">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkFileChooserButton" id="FirstRunAssistant.x3ap-backup-filechooserbutton">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">2</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">6</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="complete">True</property>
+        <property name="has_padding">False</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="FirstRunAssistant.box6">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">3</property>
+        <child>
+          <object class="GtkImage" id="image5">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="pixbuf">0000005353.600x338.jpg</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label6">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">&lt;span size='large'&gt;Please choose the Data-Loader&lt;/span&gt;</property>
+            <property name="use_markup">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator" id="separator15">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkGrid" id="grid1">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="row_spacing">2</property>
+            <property name="column_spacing">2</property>
+            <child>
+              <object class="GtkCheckButton" id="FirstRunAssistant.data-shelve-checkbutton">
+                <property name="label" translatable="yes">Create data-shelve</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="xalign">0</property>
+                <property name="draw_indicator">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">2</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkCheckButton" id="FirstRunAssistant.data-xml-checkbutton">
+                <property name="label" translatable="yes">Create data-XML</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="xalign">0</property>
+                <property name="draw_indicator">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">1</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBox" id="FirstRunAssistant.preferred-loader-combobox">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="hexpand">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label9">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Preferred Loader:</property>
+                <property name="ellipsize">start</property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator" id="separator14">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">4</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="complete">True</property>
+        <property name="has_padding">False</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="FirstRunAssistant.box7">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkImage" id="image6">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="stock">gtk-missing-image</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="Confirmation Label">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">&lt;span size='x-large'&gt;Please Confirm Changes:&lt;/span&gt;</property>
+            <property name="use_markup">True</property>
+            <property name="xalign">0</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator" id="separator22">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow" id="scrolledwindow1">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="shadow_type">in</property>
+            <child>
+              <object class="GtkTextView" id="textview1">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkCheckButton" id="FirstRunAssistant.confirm-checkbutton">
+            <property name="label" translatable="yes">Apply Changes</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="xalign">0</property>
+            <property name="draw_indicator">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">4</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="page_type">confirm</property>
+        <property name="has_padding">False</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="box1">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">3</property>
+        <child>
+          <object class="GtkLabel" id="label10">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">&lt;span size='xx-large' weight='bold' background='#4A90D9' foreground='white'&gt;Installing &lt;span foreground='gold'&gt;X - Universe&lt;/span&gt;...&lt;/span&gt;</property>
+            <property name="use_markup">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow" id="FirstRunAssistant.progress-scrolledwindow">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="shadow_type">in</property>
+            <child>
+              <object class="GtkTextView" id="FirstRunAssistant.progress-textview">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="editable">False</property>
+                <property name="cursor_visible">False</property>
+                <property name="accepts_tab">False</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="page_type">progress</property>
+        <property name="complete">True</property>
+        <property name="has_padding">False</property>
+      </packing>
+    </child>
+    <child internal-child="action_area">
+      <object class="GtkBox" id="FirstRunAssistant.action-area">
+        <property name="can_focus">False</property>
+        <property name="halign">end</property>
+        <property name="margin_left">6</property>
+        <property name="margin_right">6</property>
+        <property name="margin_start">6</property>
+        <property name="margin_end">6</property>
+        <property name="margin_top">6</property>
+        <property name="margin_bottom">6</property>
+        <property name="spacing">6</property>
+      </object>
+      <packing>
+        <property name="has_padding">False</property>
+      </packing>
+    </child>
+  </object>
+  <object class="GtkMessageDialog" id="RemoveExecutableDialog">
+    <property name="can_focus">False</property>
+    <property name="type">popup</property>
+    <property name="modal">True</property>
+    <property name="window_position">center-on-parent</property>
+    <property name="default_width">-1</property>
+    <property name="default_height">-1</property>
+    <property name="type_hint">dialog</property>
+    <property name="urgency_hint">True</property>
+    <property name="message_type">question</property>
+    <property name="buttons">yes-no</property>
+    <property name="text" translatable="yes">Remove Executable?</property>
+    <property name="secondary_text" translatable="yes">Remove executable &lt;i&gt;${EXECUTABLE}&lt;/i&gt;.
+Note: This will not delete the file from disk!
+
+Do you really want to remove the Executable from the List?</property>
+    <property name="secondary_use_markup">True</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="RemoveExecutableDialog-vbox">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="RemoveExecutableDialog.action-area">
+            <property name="can_focus">False</property>
+            <property name="homogeneous">True</property>
+            <property name="layout_style">end</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator" id="separator6">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
       </object>
     </child>
+  </object>
+  <object class="GtkDialog" id="SelectGameExecutableDialog">
+    <property name="can_focus">False</property>
+    <property name="type_hint">dialog</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="SelectGameExecutableDialog.vbox">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="SelectGameExecutableDialog.action-area">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <object class="GtkButton" id="SelectGameExecutableDialog.apply-button">
+                <property name="label">gtk-apply</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="SelectGameExecutableDialog.close-button">
+                <property name="label">gtk-cancel</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkGrid" id="SelectGameExecutableDialog.grid">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="row_spacing">2</property>
+            <property name="column_spacing">2</property>
+            <child>
+              <object class="GtkSeparator" id="separator4">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">2</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkCheckButton" id="SelectGameExecutableDialog.nosteam-checkbutton">
+                <property name="label" translatable="yes">Enable NoSteam.</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="xalign">0</property>
+                <property name="draw_indicator">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">3</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="SelectGameExecutableDialog.nosteam-label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">NoSteam:</property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkFileChooserButton" id="SelectGameExecutableDialog.nosteam-chooserbutton">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="SelectGameExecutableDialog.default-launcher-label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Default Launcher:</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">5</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBox" id="SelectGameExecutableDialog.default-launcher-combobox">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="hexpand">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">5</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="SelectGameExecutableDialog.executable-label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Executable:</property>
+                <property name="single_line_mode">True</property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="SelectGameExecutableDialog.name-label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Name:</property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="SelectGameExecutableDialog.info">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="hexpand">True</property>
+                <property name="text" translatable="yes">default</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkFileChooserButton" id="SelectGameExecutableDialog.exec-chooserbutton">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="hexpand">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator" id="separator5">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="-10">SelectGameExecutableDialog.apply-button</action-widget>
+      <action-widget response="-6">SelectGameExecutableDialog.close-button</action-widget>
+    </action-widgets>
   </object>
 </interface>

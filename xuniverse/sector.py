@@ -1,25 +1,27 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# vim:ts=4:sts=4:tw=80:
+################################################################################
+# Package: xuniverse
+# File: xuniverse/sector.py
+# Author: Christian Moser
+################################################################################
+# xuniverse/dialog.py
+# Copyright (C) 2018  Christian Moser
 #
-#  sector.py
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
 #
-#  Copyright 2018 c9 <c9@WINDOZE>
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
 #
-#  This program is free software; you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation; either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with this program; if not, write to the Free Software
-#  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-#  MA 02110-1301, USA.
-#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+################################################################################
 
 from gi.repository import Gtk,GObject
 
@@ -30,4 +32,5 @@ class SectorView(Gtk.Grid):
 class SectorChooser(Gtk.VBox):
     def __init__(self):
         Gtk.Grid.__init__(self)
+
 
