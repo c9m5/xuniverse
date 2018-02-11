@@ -393,6 +393,7 @@ Author: Christian Moser
                     <property name="label" translatable="yes">toolbutton2</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-edit</property>
+                    <signal name="clicked" handler="on_x3tc_executables_add_toolbutton_clicked" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -1362,23 +1363,23 @@ Do you really want to remove the Executable from the List?</property>
       <pattern>x3tc.exe</pattern>
     </patterns>
   </object>
-  <object class="GtkDialog" id="SelectGameExecutableDialog">
+  <object class="GtkDialog" id="SelectExecutableDialogX3TC">
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">X- Universe: Choose 'X3 - Terran Conflict' executable</property>
     <property name="modal">True</property>
     <property name="destroy_with_parent">True</property>
     <property name="type_hint">dialog</property>
     <child internal-child="vbox">
-      <object class="GtkBox" id="SelectGameExecutableDialog.vbox">
+      <object class="GtkBox" id="SelectExecutableDialogX3TC.vbox">
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child internal-child="action_area">
-          <object class="GtkButtonBox" id="SelectGameExecutableDialog.dialog-action_area">
+          <object class="GtkButtonBox" id="SelectExecutableDialogX3TC.dialog-action_area">
             <property name="can_focus">False</property>
             <property name="layout_style">end</property>
             <child>
-              <object class="GtkButton" id="SelectGameExecutableDialog.apply-button">
+              <object class="GtkButton" id="SelectExecutableDialogX3TC.apply-button">
                 <property name="label">gtk-apply</property>
                 <property name="visible">True</property>
                 <property name="sensitive">False</property>
@@ -1393,7 +1394,7 @@ Do you really want to remove the Executable from the List?</property>
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="SelectGameExecutableDialog.cancel-button">
+              <object class="GtkButton" id="SelectExecutableDialogX3TC.cancel-button">
                 <property name="label">gtk-cancel</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -1414,12 +1415,12 @@ Do you really want to remove the Executable from the List?</property>
           </packing>
         </child>
         <child>
-          <object class="GtkGrid" id="SelectGameExecutableDialog.grid">
+          <object class="GtkGrid" id="SelectExecutableDialogX3TC.grid">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="column_spacing">2</property>
             <child>
-              <object class="GtkLabel" id="SelectGameExecutableDialog.label1">
+              <object class="GtkLabel" id="SelectExecutableDialogX3TC.name-label">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Name:</property>
@@ -1431,7 +1432,7 @@ Do you really want to remove the Executable from the List?</property>
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="SelectGameExecutableDialog.label2">
+              <object class="GtkLabel" id="SelectExecutableDialogX3TC.executable-label">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Executable:</property>
@@ -1443,7 +1444,7 @@ Do you really want to remove the Executable from the List?</property>
               </packing>
             </child>
             <child>
-              <object class="GtkFileChooserButton" id="SelectGameExecutableDialog.executable-filechooserbutton">
+              <object class="GtkFileChooserButton" id="SelectExecutableDialogX3TC.executable-filechooserbutton">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="hexpand">True</property>
@@ -1455,7 +1456,7 @@ Do you really want to remove the Executable from the List?</property>
               </packing>
             </child>
             <child>
-              <object class="GtkEntry" id="SelectGameExecutableDialog.executable-entry">
+              <object class="GtkEntry" id="SelectExecutableDialogX3TC.name-entry">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="hexpand">True</property>
@@ -1475,6 +1476,10 @@ Do you really want to remove the Executable from the List?</property>
         </child>
       </object>
     </child>
+    <action-widgets>
+      <action-widget response="-10">SelectExecutableDialogX3TC.apply-button</action-widget>
+      <action-widget response="-6">SelectExecutableDialogX3TC.cancel-button</action-widget>
+    </action-widgets>
   </object>
   <object class="GtkDialog" id="SelectGameNoSteamExecutableDialog">
     <property name="can_focus">False</property>

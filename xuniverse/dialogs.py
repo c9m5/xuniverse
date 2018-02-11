@@ -22,17 +22,24 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ################################################################################
+
 import config
 from gi.repository import Gtk,GObject
+import sys,os
+
 import data
 
 ################################################################################
 
-class SelectGameExecutableDialog_GUI(object):
+class SelectExecutableDialogX3TC_GUI(object):
     _OBJECTS_={
-        'dialog':'SelectGameExecutableDialog',
-        'executable-label':'SelectGameExecutableDialog.label2',
-        'name-label':'SelectGameExecutableDialog.label1'
+        'dialog':'SelectExecutableDialogX3TC',
+        'apply-button':'SelectExecutableDialogX3TC.apply-button',
+        'cancel-button':'SelectExecutableDialogX3TC.cancel-button',
+        'executable-label':'SelectExecutableDialogX3TC.executble-label',
+        'executable-filechooserbutton':'SelectExecutableDialogX3TC.executable-filechooserbutton',
+        'name-label':'SelectExecutableDialogX3TC.name-label',
+        'name-entry':'SelectExecutableDialogX3TC.name-entry',
     }
     _GUI_=dict(file=config.SETTINGS['uifile'],
                objects=[_OBJECTS_['dialog'],
@@ -41,7 +48,14 @@ class SelectGameExecutableDialog_GUI(object):
     def __init__(self,parent=None):
         self.__builder=Gtk.Builder()
         self.builder.add_objects_from_file(self._GUI_['file'],self._GUI_['objects'])
-        self._objmap_=dict()
+        self._objmap_=dict(
+            executable_label=self.executable_label,
+            executable_filechooserbutton=self.executable_filechooserbutton,
+            name_label=self.name_label,
+            name_entry=self.name_entry,
+            apply_button=self.apply_button,
+            cancel_butoon=self.cancel_button)
+
         if parent:
             self.dialog.set_transient_for(parent)
 
@@ -61,6 +75,22 @@ class SelectGameExecutableDialog_GUI(object):
                 setattr(dialog,attr,value)
         return dialog
 
+    @property
+    def executable_label(self):
+        return self.get_object('executable-label')
+
+    @property
+    def executable_filechooser(self):
+        return self.get_object('executable-filechooserbutton')
+
+    @property
+    def name_label(self):
+        return self.get_object('name-label')
+
+    @property
+    def name_entry(self):
+        return self.get_object('name-entry')
+
     def _on_toplevel_destroy(self,toplevel):
         for attr in self._objmap_.iterkeys():
             if hasattr(toplevel,attr):
@@ -68,9 +98,11 @@ class SelectGameExecutableDialog_GUI(object):
         if hasattr(toplevel,'gui_handle'):
             delattr(toplevel,'gui_handle')
 
-    #def on_
+    def on_executable_set(self,filechooserbutton):
+        if (os.path.exists(filechooserbutton.get_filename())):
+            self.apply_button.set_sensitive(True)
 
-def SelectGameExecutableDialog(parent=None):
+def SelectExecutableDialogX3TC(parent=None):
     return SelectGameExecutableDialog_GUI(parent=parent).dialog
 
 ################################################################################
@@ -107,8 +139,8 @@ class FirstRunAssistant_GUI(object):
         'x3tc-executables-scrolledwindow':'FirstRunAssistant.x3tc-executables-scrolledwindow',
         'x3tc-executables-toolbar':'FirstRunAssistant.x3tc-executables-toolbar',
         'x3tc-executables-add-toolbutton':'FirstRunAssistant.x3tc-executables-add-toolbutton',
-        'x3ap-executables-edit-toolbutton':'FirstRunAssistant.x3ap-executables-edit-toolbutton',
-        'x3ap-executables-remove-toolbutton':'FirstRunAssistant.x3ap-executables-remove-toolbutton',
+        'x3tc-executables-edit-toolbutton':'FirstRunAssistant.x3tc-executables-edit-toolbutton',
+        'x3tc-executables-remove-toolbutton':'FirstRunAssistant.x3tc-executables-remove-toolbutton',
         'x3tc-executables-treeview':'FirstRunAssistant.x3tc-executables-treeview'}
 
     _GUI_=dict(file=config.SETTINGS['uifile'],
