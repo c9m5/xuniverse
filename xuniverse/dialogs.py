@@ -26,6 +26,55 @@ import config
 from gi.repository import Gtk,GObject
 import data
 
+################################################################################
+
+class SelectGameExecutableDialog_GUI(object):
+    _OBJECTS_={
+        'dialog':'SelectGameExecutableDialog',
+        'executable-label':'SelectGameExecutableDialog.label2',
+        'name-label':'SelectGameExecutableDialog.label1'
+    }
+    _GUI_=dict(file=config.SETTINGS['uifile'],
+               objects=[_OBJECTS_['dialog'],
+                        'x3tc-executable-filter'])
+
+    def __init__(self,parent=None):
+        self.__builder=Gtk.Builder()
+        self.builder.add_objects_from_file(self._GUI_['file'],self._GUI_['objects'])
+        self._objmap_=dict()
+        if parent:
+            self.dialog.set_transient_for(parent)
+
+    @property
+    def builder(self):
+        return self.__builder
+
+    def get_object(self,oid):
+        return self.builder.get_object(self._OBJECTS_.get(oid,oid))
+
+    @property
+    def dialog(self):
+        dialog=self.get_object('dialog')
+        if not hasattr(dialog,'gui_handle'):
+            setattr(dialog,'gui_handle',self)
+            for attr,value in self._objmap_.iteritems():
+                setattr(dialog,attr,value)
+        return dialog
+
+    def _on_toplevel_destroy(self,toplevel):
+        for attr in self._objmap_.iterkeys():
+            if hasattr(toplevel,attr):
+                delattr(toplevel,attr)
+        if hasattr(toplevel,'gui_handle'):
+            delattr(toplevel,'gui_handle')
+
+    #def on_
+
+def SelectGameExecutableDialog(parent=None):
+    return SelectGameExecutableDialog_GUI(parent=parent).dialog
+
+################################################################################
+
 class FirstRunAssistant_Pages(object):
         (
             INTRO,
@@ -40,44 +89,6 @@ class FirstRunAssistant_Pages(object):
         def __init__(self):
             object.__init__(self)
 
-class SelectGameExecutableDialog_GUI(object):
-    _OBJECTS_={
-        'dialog':'SelectGameExecutableDialog',
-    }
-    _GUI_=dict(file=config.SETTINGS['uifile'],objects=[_OBJECTS_['dialog']])
-
-    def __init__(self):
-        self.__builder=Gtk.Builder()
-        builder.add_objects_from_file(_GUI_['file'],_GUI_['objects'])
-        self._objmap_=dict()
-    @property
-    def builder(self):
-        return self.builder
-
-    def get_object(self,oid):
-        return self.builder.get_object(_OBJECTS_.get(oid,oid))
-
-    @property
-    def dialog(self):
-        dialog=self.builder.get_object('dialog')
-        if not hasattr(dialog,'gui_handle'):
-            setattr(dialog,'gui_handle',self)
-            for attr,value in self._objmap_.iteritems():
-                setattr(dialog,attr,value)
-        return dialog
-
-    def _on_toplevel_destroy(self,toplevel):
-        for attr in self._objmap_.iterkeys():
-            if hasattr(toplevel,attr):
-                delattr(toplevel,attr)
-        if hasattr(toplevel,'gui_handle'):
-            delattr(toplevel,'gui_handle')
-
-def SelectGameExecutableDialog():
-    return SelectGameExecutableDialog_GUI().dialog
-
-################################################################################
-
 class FirstRunAssistant_GUI(object):
     _OBJECTS_={
         'assistant':'FirstRunAssistant',
@@ -87,12 +98,17 @@ class FirstRunAssistant_GUI(object):
         'x3ap-executables-liststore':'FirstRunAssistant.x3ap-executables-liststore',
         'x3ap-executables-scrolledwindow':'FirstRunAssistant.x3ap-executables-scrolledwindow',
         'x3ap-executables-toolbar':'FirstRunAssistant.x3tc-executables-toolbar',
-        'x3tc-executables-add-toolbutton':'FirstRunAssistant.x3tc-executables-add-toolbutton',
+        'x3ap-executables-add-toolbutton':'FirstRunAssistant.x3ap-executables-add-toolbutton',
+        'x3ap-executables-edit-toolbutton':'FirstRunAssistant.x3ap-executables-edit-toolbutton',
+        'x3ap-executables-remove-toolbutton':'FirstRunAssistant.x3ap-executables-remove-toolbutton',
         'x3ap-executables-treeview':'FirstRunAssistant.x3tc-executables-treeview',
         'x3tc-checkbutton':'FirstRunAssistant.x3tc-checkbutton',
         'x3tc-executables-liststore':'FirstRunAssistant.x3tc-executables-liststore',
         'x3tc-executables-scrolledwindow':'FirstRunAssistant.x3tc-executables-scrolledwindow',
         'x3tc-executables-toolbar':'FirstRunAssistant.x3tc-executables-toolbar',
+        'x3tc-executables-add-toolbutton':'FirstRunAssistant.x3tc-executables-add-toolbutton',
+        'x3ap-executables-edit-toolbutton':'FirstRunAssistant.x3ap-executables-edit-toolbutton',
+        'x3ap-executables-remove-toolbutton':'FirstRunAssistant.x3ap-executables-remove-toolbutton',
         'x3tc-executables-treeview':'FirstRunAssistant.x3tc-executables-treeview'}
 
     _GUI_=dict(file=config.SETTINGS['uifile'],
@@ -155,6 +171,18 @@ class FirstRunAssistant_GUI(object):
     def x3ap_enabled(self):
         return self.x3ap_checkbutton.get_active()
 
+    @property
+    def x3ap_executables_add_toolbutton(self):
+        return self.get_object('x3ap-executables-add-toolbutton')
+
+    @property
+    def x3ap_executables_edit_toolbutton(self):
+        return self.get_object('x3ap-executables-edit-toolbutton')
+
+    @property
+    def x3ap_executables_remove_toolbutton(self):
+        return self.get_object('x3ap-executables-remove-toolbutton')
+
 
     @property
     def x3tc_checkbutton(self):
@@ -163,6 +191,18 @@ class FirstRunAssistant_GUI(object):
     @property
     def x3tc_enabled(self):
         return self.x3tc_checkbutton.get_active()
+
+    @property
+    def x3tc_executables_liststore(self):
+        return self.get_object('x3tc-executables-liststore')
+
+    @property
+    def x3tc_executables_scrolledwindow(self):
+        return self.get_object('x3tc-executables-scrolledwindow')
+
+    @property
+    def x3tc_executables_toolbar(self):
+        return self.get_object('x3tc-executables-toolbar')
 
     @property
     def x3tc_executables_scrolledwindow(self):
@@ -175,6 +215,19 @@ class FirstRunAssistant_GUI(object):
     @property
     def x3tc_executables_add_toolbutton(self):
         return self.get_object('x3tc-executables-add-toolbutton')
+
+    @property
+    def x3tc_executables_edit_toolbutton(self):
+        return self.get_object('x3tc-executables-edit-toolbutton')
+
+    @property
+    def x3tc_executables_remove_toolbutton(self):
+        return self.get_object('x3tc-executables-remove-toolbutton')
+
+    @property
+    def x3tc_executables_treeview(self):
+        return self.get_object('x3tc-executables-treeview')
+
 
     def _forward_page_func(self,current_page,*args):
         def get_advanced_page():
@@ -226,7 +279,7 @@ class FirstRunAssistant_GUI(object):
         pass
 
     def on_x3tc_executables_add_toolbutton_clicked(self,button):
-        dialog=SelectGameExecutableDialog()
+        dialog=SelectGameExecutableDialog(self.assistant)
         if dialog.run() == Gtk.ResponseType.APPLY:
             #TODO: add to liststore
             pass
@@ -241,6 +294,6 @@ class FirstRunAssistant_GUI(object):
 
 
 
-def FirstRunAssistant(exit_on_cancel=False):
+def FirstRunAssistant(parent=None,exit_on_cancel=False):
     return FirstRunAssistant_GUI(exit_on_cancel=exit_on_cancel).assistant
 

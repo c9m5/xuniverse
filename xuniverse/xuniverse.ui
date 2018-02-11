@@ -59,7 +59,15 @@ Author: Christian Moser
           </packing>
         </child>
         <child>
-          <placeholder/>
+          <object class="GtkSeparator" id="separator7">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
         </child>
       </object>
     </child>
@@ -370,6 +378,7 @@ Author: Christian Moser
                     <property name="label" translatable="yes">toolbutton1</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-add</property>
+                    <signal name="clicked" handler="on_x3tc_executables_add_toolbutton_clicked" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -1333,8 +1342,31 @@ Do you really want to remove the Executable from the List?</property>
       </object>
     </child>
   </object>
+  <object class="GtkFileFilter" id="win-executable-filter">
+    <patterns>
+      <pattern>*.exe</pattern>
+    </patterns>
+  </object>
+  <object class="GtkFileFilter" id="x3ap-executable-filter">
+    <patterns>
+      <pattern>x3ap.exe</pattern>
+    </patterns>
+  </object>
+  <object class="GtkFileFilter" id="x3ap-nosteam-executable-filter">
+    <patterns>
+      <pattern>x3apn.exe</pattern>
+    </patterns>
+  </object>
+  <object class="GtkFileFilter" id="x3tc-executable-filter">
+    <patterns>
+      <pattern>x3tc.exe</pattern>
+    </patterns>
+  </object>
   <object class="GtkDialog" id="SelectGameExecutableDialog">
     <property name="can_focus">False</property>
+    <property name="title" translatable="yes">X- Universe: Choose 'X3 - Terran Conflict' executable</property>
+    <property name="modal">True</property>
+    <property name="destroy_with_parent">True</property>
     <property name="type_hint">dialog</property>
     <child internal-child="vbox">
       <object class="GtkBox" id="SelectGameExecutableDialog.vbox">
@@ -1342,11 +1374,122 @@ Do you really want to remove the Executable from the List?</property>
         <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child internal-child="action_area">
-          <object class="GtkButtonBox" id="SelectGameExecutableDialog.action-area">
+          <object class="GtkButtonBox" id="SelectGameExecutableDialog.dialog-action_area">
             <property name="can_focus">False</property>
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="SelectGameExecutableDialog.apply-button">
+                <property name="label">gtk-apply</property>
+                <property name="visible">True</property>
+                <property name="sensitive">False</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="SelectGameExecutableDialog.cancel-button">
+                <property name="label">gtk-cancel</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkGrid" id="SelectGameExecutableDialog.grid">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="column_spacing">2</property>
+            <child>
+              <object class="GtkLabel" id="SelectGameExecutableDialog.label1">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Name:</property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="SelectGameExecutableDialog.label2">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Executable:</property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkFileChooserButton" id="SelectGameExecutableDialog.executable-filechooserbutton">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="hexpand">True</property>
+                <property name="filter">x3tc-executable-filter</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="SelectGameExecutableDialog.executable-entry">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="hexpand">True</property>
+                <property name="text" translatable="yes">default</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkDialog" id="SelectGameNoSteamExecutableDialog">
+    <property name="can_focus">False</property>
+    <property name="type_hint">dialog</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="SelectGameExecutableNoSteamDialog.vbox">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="SelectGameExecutableNoSteamDialog.action-area">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <object class="GtkButton" id="SelectGameExecutableNoSteamDialog.apply-button">
                 <property name="label">gtk-apply</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -1360,7 +1503,7 @@ Do you really want to remove the Executable from the List?</property>
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="SelectGameExecutableDialog.close-button">
+              <object class="GtkButton" id="SelectGameExecutableNoSteamDialog.close-button">
                 <property name="label">gtk-cancel</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -1381,7 +1524,7 @@ Do you really want to remove the Executable from the List?</property>
           </packing>
         </child>
         <child>
-          <object class="GtkGrid" id="SelectGameExecutableDialog.grid">
+          <object class="GtkGrid" id="SelectGameExecutableNoSteamDialog.grid">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="row_spacing">2</property>
@@ -1498,6 +1641,7 @@ Do you really want to remove the Executable from the List?</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="hexpand">True</property>
+                <property name="filter">x3tc-executable-filter</property>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -1526,8 +1670,8 @@ Do you really want to remove the Executable from the List?</property>
       </object>
     </child>
     <action-widgets>
-      <action-widget response="-10">SelectGameExecutableDialog.apply-button</action-widget>
-      <action-widget response="-6">SelectGameExecutableDialog.close-button</action-widget>
+      <action-widget response="-10">SelectGameExecutableNoSteamDialog.apply-button</action-widget>
+      <action-widget response="-6">SelectGameExecutableNoSteamDialog.close-button</action-widget>
     </action-widgets>
   </object>
 </interface>
