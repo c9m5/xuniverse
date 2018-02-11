@@ -147,8 +147,6 @@ class FirstRunAssistant_GUI(object):
     def advanced_options_enabled(self):
         return self.advanced_options_checkbutton.get_active()
 
-
-
     @property
     def x3ap_checkbutton(self):
         return self.get_object('x3ap-checkbutton')
@@ -231,6 +229,7 @@ class FirstRunAssistant_GUI(object):
         dialog=SelectGameExecutableDialog()
         if dialog.run() == Gtk.ResponseType.APPLY:
             #TODO: add to liststore
+            pass
         dialog.hide()
         dialog.destroy()
 
