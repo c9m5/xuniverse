@@ -6,7 +6,7 @@
 # File: xuniverse/sector.py
 # Author: Christian Moser
 ################################################################################
-# xuniverse/dialog.py
+#
 # Copyright (C) 2018  Christian Moser
 #
 # This program is free software: you can redistribute it and/or modify
@@ -21,16 +21,22 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+# Addition: YOU ARE NOT ALLOWED TO USE THIS SOFTWARE TO COMMIT (PROJECT
+#           MONARCH) SLAVERY (like UN, EU, BAWAG, PostAG, LAM (Local Area
+#           Machines) Research (Redmond?),...), AND TORT (expecially P.U.S -
+#           Punish United System!).
 ################################################################################
 
 from gi.repository import Gtk,GObject
 
 class SectorView(Gtk.Grid):
+    views=['political','ore','silicon']
     def __init__(self,view='political'):
         Gtk.Grid.__init__(self)
 
 class SectorChooser(Gtk.VBox):
     def __init__(self):
-        Gtk.Grid.__init__(self)
+        Gtk.VBox.__init__(self)
 
 

@@ -21,7 +21,13 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+# Addition: YOU ARE NOT ALLOWED TO USE THIS SOFTWARE TO COMMIT (PROJECT
+#           MONARCH) SLAVERY (like UN, EU, BAWAG, PostAG, LAM (Local Area
+#           Machines) Research (Redmond?),...), AND TORT (expecially P.U.S -
+#           Punish United System!).
 ################################################################################
+
 
 import config
 from gi.repository import Gtk,GObject,Gio,GLib,Gdk,GdkPixbuf

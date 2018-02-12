@@ -21,6 +21,11 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+# Addition: YOU ARE NOT ALLOWED TO USE THIS SOFTWARE TO COMMIT (PROJECT
+#           MONARCH) SLAVERY (like UN, EU, BAWAG, PostAG, LAM (Local Area
+#           Machines) Research (Redmond?),...), AND TORT (expecially P.U.S -
+#           Punish United System!).
 ################################################################################
 
 import config
@@ -45,7 +50,7 @@ class SelectExecutableDialogX3TC_GUI(object):
                objects=[_OBJECTS_['dialog'],
                         'x3tc-executable-filter'])
 
-    def __init__(self,parent=None):
+    def __init__(self,parent=None,name='default',executable=None):
         self.__builder=Gtk.Builder()
         self.builder.add_objects_from_file(self._GUI_['file'],self._GUI_['objects'])
         self._objmap_=dict(
@@ -58,6 +63,11 @@ class SelectExecutableDialogX3TC_GUI(object):
 
         if parent:
             self.dialog.set_transient_for(parent)
+        self.builder.connect_signals(self)
+        self.name_entry.set_text(name)
+        if executable:
+            self.executable_filechooserbutton.set_filename(executable)
+            self.apply_button.set_sensitive(os.path.exists(executable))
 
     @property
     def builder(self):
@@ -76,11 +86,19 @@ class SelectExecutableDialogX3TC_GUI(object):
         return dialog
 
     @property
+    def apply_button(self):
+        return self.get_object('apply-button')
+
+    @property
+    def cancel_button(self):
+        return self.get_object('cancel_button')
+
+    @property
     def executable_label(self):
         return self.get_object('executable-label')
 
     @property
-    def executable_filechooser(self):
+    def executable_filechooserbutton(self):
         return self.get_object('executable-filechooserbutton')
 
     @property
@@ -91,6 +109,7 @@ class SelectExecutableDialogX3TC_GUI(object):
     def name_entry(self):
         return self.get_object('name-entry')
 
+
     def _on_toplevel_destroy(self,toplevel):
         for attr in self._objmap_.iterkeys():
             if hasattr(toplevel,attr):
@@ -98,12 +117,38 @@ class SelectExecutableDialogX3TC_GUI(object):
         if hasattr(toplevel,'gui_handle'):
             delattr(toplevel,'gui_handle')
 
-    def on_executable_set(self,filechooserbutton):
-        if (os.path.exists(filechooserbutton.get_filename())):
+    def on_executable_filechooserbutton_file_set(self,filechooser):
+        if os.path.exists(self.executable_filechooserbutton.get_filename()):
             self.apply_button.set_sensitive(True)
 
-def SelectExecutableDialogX3TC(parent=None):
-    return SelectGameExecutableDialog_GUI(parent=parent).dialog
+def SelectExecutableDialogX3TC(parent=None,name='default',executable=None):
+    return SelectExecutableDialogX3TC_GUI(parent=parent,name=name,executable=executable).dialog
+
+################################################################################
+
+class RemoveExecutableDialog_GUI(object):
+    _OBJECTS_={
+        'dialog':'RemoveExecutableDialog'}
+    _GUI_=dict(file=config.SETTINGS['uifile'],
+               objects=[_OBJECTS_['dialog']])
+
+    def __init__(self,parent=None,executable=""):
+        self.__builder=Gtk.Builder()
+        self.builder.add_objects_from_file(_GUI_['file'],_GUI_['objects'])
+
+    @property
+    def builder(self):
+        return self.__builder
+
+    @property
+    def dialog(self):
+        return self.get_object('dialog')
+
+    def get_object(self,oid):
+        return sel.builder.get_object(oid)
+
+def RemoveExecutableDialog(parent=None):
+    return RemoveExecutableDialog_GUI()
 
 ################################################################################
 
@@ -166,10 +211,10 @@ class FirstRunAssistant_GUI(object):
             x3tc_enabled=self.x3tc_enabled)
 
         self.builder.connect_signals(self)
+        self.builder.connect_signals(self)
 
         self.assistant.connect('destroy',self._on_toplevel_destroy)
         self.assistant.set_forward_page_func(self._forward_page_func)
-
 
     def get_object(self,oid):
         return self.builder.get_object(self._OBJECTS_.get(oid,oid))
@@ -295,15 +340,19 @@ class FirstRunAssistant_GUI(object):
 
     def on_assistant_apply(self,assistant):
         pass
+
     def on_assistant_cancel(self,assistant):
         pass
+
     def on_assistant_close(self,assistant):
         pass
+
     def on_assistant_prepare(self,assistant,*args):
         """
             Called for every page!
         """
         pass
+
     def on_assistant_escape(self,assistant):
         pass
 
@@ -311,19 +360,38 @@ class FirstRunAssistant_GUI(object):
         pass
 
     def on_x3tc_executables_add_toolbutton_clicked(self,button):
-        dialog=SelectGameExecutableDialog(self.assistant)
+        dialog=SelectExecutableDialogX3TC(self.assistant)
         if dialog.run() == Gtk.ResponseType.APPLY:
-            #TODO: add to liststore
-            pass
+            row=self.x3tc_executables_liststore.append()
+            self.x3tc_executables_liststore[row][0]=dialog.name_entry.get_text()
+            self.x3tc_executables_liststore[row][1]=dialog.executable_filechooserbutton.get_filename()
+            self.x3tc_executables_treeview.show()
         dialog.hide()
         dialog.destroy()
 
     def on_x3tc_executables_edit_toolbutton_clicked(self,button):
-        pass
+        model,row=self.x3tc_executables_treeview.get_selection().get_selected()
+        dialog=SelectExecutableDialogX3TC(self.assistant,model.get_value(row,0),model.get_value(row,1))
+        if dialog.run() == Gtk.ResponseType.APPLY:
+            row=self.x3tc_executables_liststore.append()
+            self.x3tc_executables_liststore[row][0]=dialog.name_entry.get_text()
+            self.x3tc_executables_liststore[row][1]=dialog.executable_filechooserbutton.get_filename()
+            self.x3tc_executables_treeview.show()
+        dialog.hide()
+        dialog.destroy()
 
     def on_x3tc_executables_remove_toolbutton_clicked(self,button):
-        pass
+        model,row=self.x3tc_executables_treeview.get_selection().get_selected()
+        dialog=RemoveExecutableDialog(self,model.get_value(row,1))
 
+    def x3tc_executables_treeview_selection_changed(self,selection):
+        model,iter=selection.get_selected()
+        if iter is None:
+            self.x3tc_executables_edit_toolbutton.set_sensitive(False)
+            self.x3tc_executables_remove_toolbutton.set_sensitive(False)
+        else:
+            self.x3tc_executables_edit_toolbutton.set_sensitive(True)
+            self.x3tc_executables_remove_toolbutton.set_sensitive(True)
 
 
 def FirstRunAssistant(parent=None,exit_on_cancel=False):
