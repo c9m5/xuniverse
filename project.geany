@@ -28,11 +28,11 @@ long_line_behaviour=1
 long_line_column=80
 
 [files]
-current_page=0
-FILE_NAME_0=591;Python;0;EUTF-8;0;1;0;C%3A%5CUsers%5Cc9%5CProjekte%5Cpython%5Cxuniverse%5Cxuniverse%5Capplication.py;0;4
-FILE_NAME_1=528;Python;0;EUTF-8;0;1;0;C%3A%5CUsers%5Cc9%5CProjekte%5Cpython%5Cxuniverse%5Cxuniverse%5Cconfig.py;0;4
-FILE_NAME_2=161;Python;0;EUTF-8;0;1;0;C%3A%5CUsers%5Cc9%5CProjekte%5Cpython%5Cxuniverse%5Cxuniverse%5C__main__.py;0;4
-FILE_NAME_3=115;Python;0;EUTF-8;0;1;0;C%3A%5CUsers%5Cc9%5CProjekte%5Cpython%5Cxuniverse%5Cxuniverse%5Cbrowser.py;0;4
-FILE_NAME_4=301;Python;0;EUTF-8;0;1;0;C%3A%5CUsers%5Cc9%5CProjekte%5Cpython%5Cxuniverse%5Cxuniverse%5Cnavigator.py;0;4
-FILE_NAME_5=41;Python;0;EUTF-8;0;1;0;C%3A%5CUsers%5Cc9%5CProjekte%5Cpython%5Cxuniverse%5Cxuniverse%5C__init__.py;0;4
-FILE_NAME_6=881;Python;0;EUTF-8;0;1;0;C%3A%5CUsers%5Cc9%5CProjekte%5Cpython%5Cxuniverse%5Cxuniverse%5Csector.py;0;4
+current_page=1
+FILE_NAME_0=1331;Python;0;EUTF-8;0;1;0;C%3A%5CUsers%5Cc9%5CProjekte%5Cpython%5Cxuniverse%5Cxuniverse%5Capplication.py;0;4
+FILE_NAME_1=1327;Python;0;EUTF-8;0;1;0;C%3A%5CUsers%5Cc9%5CProjekte%5Cpython%5Cxuniverse%5Cxuniverse%5Cdialogs.py;0;4
+FILE_NAME_2=1326;Python;0;EUTF-8;0;1;0;C%3A%5CUsers%5Cc9%5CProjekte%5Cpython%5Cxuniverse%5Cxuniverse%5Cconfig.py;0;4
+FILE_NAME_3=1327;Python;0;EUTF-8;0;1;0;C%3A%5CUsers%5Cc9%5CProjekte%5Cpython%5Cxuniverse%5Cxuniverse%5Cbrowser.py;0;4
+FILE_NAME_4=1329;Python;0;EUTF-8;0;1;0;C%3A%5CUsers%5Cc9%5CProjekte%5Cpython%5Cxuniverse%5Cxuniverse%5Cnavigator.py;0;4
+FILE_NAME_5=1328;Python;0;EUTF-8;0;1;0;C%3A%5CUsers%5Cc9%5CProjekte%5Cpython%5Cxuniverse%5Cxuniverse%5C__init__.py;0;4
+FILE_NAME_6=1591;Python;0;EUTF-8;0;1;0;C%3A%5CUsers%5Cc9%5CProjekte%5Cpython%5Cxuniverse%5Cxuniverse%5Csector.py;0;4

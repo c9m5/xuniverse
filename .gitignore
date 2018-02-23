@@ -8,3 +8,4 @@
 temp
 .xuniverse.conf
 *.pyc
+**/\#*\#

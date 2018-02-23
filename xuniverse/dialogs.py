@@ -186,7 +186,16 @@ class FirstRunAssistant_GUI(object):
         'x3tc-executables-add-toolbutton':'FirstRunAssistant.x3tc-executables-add-toolbutton',
         'x3tc-executables-edit-toolbutton':'FirstRunAssistant.x3tc-executables-edit-toolbutton',
         'x3tc-executables-remove-toolbutton':'FirstRunAssistant.x3tc-executables-remove-toolbutton',
-        'x3tc-executables-treeview':'FirstRunAssistant.x3tc-executables-treeview'}
+        'x3tc-executables-treeview':'FirstRunAssistant.x3tc-executables-treeview',
+        'x3tc-savegames-checkbutton':'FirstRunAssistant.x3tc-savegames-checkbutton',
+        'x3tc-savegames-backup-checkbutton':'FirstRunAssistant.x3tc-savegames-backup-checkbutton',
+        'x3tc-savegames-grid':'FirstRunAssistant.x3tc-savegames-grid',
+        'x3tc-savegames-dir-label':'FirstRunAssistant.x3tc-savegames-dir-label',
+        'x3tc-savegames-dir-filechooserbutton':'FirstRunAssistant.x3tc-savegames-dir-filechooserbutton',
+        'x3tc-savegames-workdir-label':'FirstRunAssistant.x3tc-savegames-workdir-label',
+        'x3tc-savegames-workdir-filechooserbutton':'FirstRunAssistant.x3tc-savegames-workdir-filechooserbutton',
+        'x3tc-savegames-backupdir-label':'FirstRunAssistant.x3tc-savegames-backupdir-label',
+        'x3tc-savegames-backupdir-filechooserbutton':'FirstRunAssistant.x3tc-savegames-backupdir-filechooserbutton'}
 
     _GUI_=dict(file=config.SETTINGS['uifile'],
                objects=[_OBJECTS_['x3ap-executables-liststore'],
@@ -305,7 +314,46 @@ class FirstRunAssistant_GUI(object):
     def x3tc_executables_treeview(self):
         return self.get_object('x3tc-executables-treeview')
 
-
+    @property
+    def x3tc_savegames_checkbutton(self):
+        return self.get_object('x3tc-savegames-checkbutton')
+        
+    @property
+    def x3tc_savegames_enabled(self):
+        return self.x3tc_savegames_checkbutton.get_active()
+        
+    @property
+    def x3tc_savegames_grid(self):
+        return self.get_object('x3tc-savegames-grid')
+        
+    @property
+    def x3tc_savegames_backup_checkbutton(self):
+        return self.get_object('x3tc-savegames-backup-checkbutton')
+    
+    @property
+    def x3tc_savegames_dir_label(self):
+        return self.get_object('x3tc-savegames-dir-label')
+        
+    @property
+    def x3tc_savegames_dir_filechooserbutton(self):
+        return self.get_object('x3tc-savegames-dir-filechooserbutton')
+    
+    @property
+    def x3tc_savegames_workdir_label(self):
+        return self.get_object('x3tc-savegames-workdir-label')
+        
+    @property
+    def x3tc_savegames_workdir_filechooserbutton(self):
+        return self.get_object('x3tc-savegames-workdir-filechooserbutton')
+        
+    @property
+    def x3tc_savegames_backupdir_label(self):
+        return self.get_object('x3tc-savegames-backupdir-label')
+        
+    @property
+    def x3tc_savegames_backupdir_filechooserbutton(self):
+        return self.get_object('x3tc-savegames-backupdir-filechooserbutton')
+        
     def _forward_page_func(self,current_page,*args):
         def get_advanced_page():
             if self.advanced_options_enabled:
@@ -384,7 +432,7 @@ class FirstRunAssistant_GUI(object):
         model,row=self.x3tc_executables_treeview.get_selection().get_selected()
         dialog=RemoveExecutableDialog(self,model.get_value(row,1))
 
-    def x3tc_executables_treeview_selection_changed(self,selection):
+    def on_x3tc_executables_treeview_selection_changed(self,selection):
         model,iter=selection.get_selected()
         if iter is None:
             self.x3tc_executables_edit_toolbutton.set_sensitive(False)
@@ -393,6 +441,13 @@ class FirstRunAssistant_GUI(object):
             self.x3tc_executables_edit_toolbutton.set_sensitive(True)
             self.x3tc_executables_remove_toolbutton.set_sensitive(True)
 
+    def on_x3tc_savegames_checkbutton_toggled(self,checkbutton):
+        self.x3tc_savegames_backup_checkbutton.set_sensitive(checkbutton.get_active())
+        self.x3tc_savegames_grid.set_sensitive(checkbutton.get_active())
+        
+    def on_x3tc_savegames_backup_checkbutton_toggled(self,checknutton):
+        self.x3tc_savegames_backupdir_label.set_sensitive(checkbutton.get_active())
+        self.x3tc_savegames_backupdir_filechooserbutton(checkbutton.get_active())
 
 def FirstRunAssistant(parent=None,exit_on_cancel=False):
     return FirstRunAssistant_GUI(exit_on_cancel=exit_on_cancel).assistant

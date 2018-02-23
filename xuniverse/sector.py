@@ -24,8 +24,8 @@
 #
 # Addition: YOU ARE NOT ALLOWED TO USE THIS SOFTWARE TO COMMIT (PROJECT
 #           MONARCH) SLAVERY (like UN, EU, BAWAG, PostAG, LAM (Local Area
-#           Machines) Research (Redmond?),...), AND TORT (expecially P.U.S -
-#           Punish United System!).
+#           Machines) Research (Redmond?),...), AND TORT, especially but
+#           not to P.U.S - Punish United System.
 ################################################################################
 
 from gi.repository import Gtk,GObject
