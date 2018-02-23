@@ -447,7 +447,7 @@ class FirstRunAssistant_GUI(object):
         
     def on_x3tc_savegames_backup_checkbutton_toggled(self,checknutton):
         self.x3tc_savegames_backupdir_label.set_sensitive(checkbutton.get_active())
-        self.x3tc_savegames_backupdir_filechooserbutton(checkbutton.get_active())
+        self.x3tc_savegames_backupdir_filechooserbutton.set_sensivitive(checkbutton.get_active())
 
 def FirstRunAssistant(parent=None,exit_on_cancel=False):
     return FirstRunAssistant_GUI(exit_on_cancel=exit_on_cancel).assistant
