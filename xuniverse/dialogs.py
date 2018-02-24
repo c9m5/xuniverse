@@ -399,7 +399,7 @@ class FirstRunAssistant_GUI(object):
         """
             Called for every page!
         """
-        pass
+
 
     def on_assistant_escape(self,assistant):
         pass
@@ -445,9 +445,10 @@ class FirstRunAssistant_GUI(object):
         self.x3tc_savegames_backup_checkbutton.set_sensitive(checkbutton.get_active())
         self.x3tc_savegames_grid.set_sensitive(checkbutton.get_active())
         
-    def on_x3tc_savegames_backup_checkbutton_toggled(self,checknutton):
+    def on_x3tc_savegames_backup_checkbutton_toggled(self,checkbutton):
         self.x3tc_savegames_backupdir_label.set_sensitive(checkbutton.get_active())
         self.x3tc_savegames_backupdir_filechooserbutton.set_sensivitive(checkbutton.get_active())
+
 
 def FirstRunAssistant(parent=None,exit_on_cancel=False):
     return FirstRunAssistant_GUI(exit_on_cancel=exit_on_cancel).assistant
