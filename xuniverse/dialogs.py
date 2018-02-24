@@ -224,6 +224,14 @@ class FirstRunAssistant_GUI(object):
 
         self.assistant.connect('destroy',self._on_toplevel_destroy)
         self.assistant.set_forward_page_func(self._forward_page_func)
+        self.x3tc_savegames_dir_filechooserbutton.select_filename(os.path.join(
+                GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOCUMENTS),
+                'Egosoft','X3TC'))
+                
+        #self.x3tc_savegames_dir_filechooserbutton.select_filename(os.path.join(
+        #        GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOCUMENTS),
+        #        'Egosoft','X3AP'))
+        
 
     def get_object(self,oid):
         return self.builder.get_object(self._OBJECTS_.get(oid,oid))
@@ -395,11 +403,11 @@ class FirstRunAssistant_GUI(object):
     def on_assistant_close(self,assistant):
         pass
 
-    def on_assistant_prepare(self,assistant,*args):
+    def on_assistant_prepare(self,assistant,page):
         """
             Called for every page!
         """
-
+        
 
     def on_assistant_escape(self,assistant):
         pass
@@ -448,6 +456,7 @@ class FirstRunAssistant_GUI(object):
     def on_x3tc_savegames_backup_checkbutton_toggled(self,checkbutton):
         self.x3tc_savegames_backupdir_label.set_sensitive(checkbutton.get_active())
         self.x3tc_savegames_backupdir_filechooserbutton.set_sensivitive(checkbutton.get_active())
+
 
 
 def FirstRunAssistant(parent=None,exit_on_cancel=False):
