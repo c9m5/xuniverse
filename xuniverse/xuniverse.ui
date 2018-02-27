@@ -103,7 +103,16 @@ Author: Christian Moser
   <object class="GtkSizeGroup" id="FirstRunAssistant-sizegroup1">
     <property name="ignore_hidden">True</property>
   </object>
-  <object class="GtkListStore" id="FirstRunAssistant.x3ap-executables-liststore"/>
+  <object class="GtkListStore" id="FirstRunAssistant.x3ap-executables-liststore">
+    <columns>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+      <!-- column-name filename -->
+      <column type="gchararray"/>
+      <!-- column-name nosteam -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
   <object class="GtkListStore" id="FirstRunAssistant.x3tc-executables-liststore">
     <columns>
       <!-- column-name name -->
@@ -710,7 +719,7 @@ Author: Christian Moser
         <property name="orientation">vertical</property>
         <property name="spacing">3</property>
         <child>
-          <object class="GtkLabel" id="label8">
+          <object class="GtkLabel" id="FirstRunAssistant.label8">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="ypad">2</property>
@@ -724,7 +733,7 @@ Author: Christian Moser
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id="label5">
+          <object class="GtkLabel" id="FirstRunAssistant.label5">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="ypad">2</property>
@@ -739,7 +748,7 @@ Author: Christian Moser
           </packing>
         </child>
         <child>
-          <object class="GtkSeparator" id="separator1">
+          <object class="GtkSeparator" id="FirstRunAssistant.separator1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
           </object>
@@ -750,7 +759,7 @@ Author: Christian Moser
           </packing>
         </child>
         <child>
-          <object class="GtkBox" id="box7">
+          <object class="GtkBox" id="FirstRunAssistant.box4.1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>
