@@ -31,8 +31,9 @@
 import config
 from gi.repository import Gtk,GObject,GLib
 import sys,os
-
 import data
+import pickle
+import shelve
 
 ################################################################################
 
@@ -407,36 +408,49 @@ class FirstRunAssistant_GUI(object):
             delattr(toplevel,'gui_handle')
 
     def on_assistant_apply(self,assistant):
-        cfg=dict(x3tc=None,x3ap=None)
-        if self.x3tc_enabled:
-            x3=dict(
-                nosteam=False,
-                executables=dict(((row[0],dict(executable=row[1]))
-                    for row in self.x3tc_executables_treeview.get_model())))
-            if x3tc_savegames_enabled:
-                x3['savegames_enabled']=True
-                x3['savegames_backup_enabled']=self.x3tc_savegames_backup_enabled
-                x3['savegames']=dict(
-                    directory=x3tc_savegames_dir_filechooserbutton.get_filename(),
-                    workdir=x3tc_savegames_workdir_filechooserbutton.get_filename(),
-                    backupdir=x3tc_savegames_backupdir_filechooserbutton.get_filename())
-            else:
-                x3['savegames_enabled']=False
-                x3['savegames']=None
-                
-            cfg['x3tc']=x3
+        if not os.path.exists(os.path.dirname(config.SETTINGS['config'])):
+            os.makedirs(os.path.dirname(config.SETTINGS['config']))
             
-        if self.x3ap_enabled:
-            x3=dict(
-                nosteam=True,
-                executables=dict(((row[0],dict(executable=row[1],
-                                          nosteam=row[2] or ''))
-                    for row in self.x3ap_executables_treeview.get_model())))
-            if self.x3ap_savegames_enabled:
-                pass
-            else:
-                x3['savegames']=None
-            cfg['x3ap']=x3
+        with shelve.open(config.SETTINGS['config'],'c',pickle.HIGHEST_PROTOCOL,True) as conf:
+            conf.update(dict(x3tc={},x3ap={}))
+            if self.x3tc_enabled:
+                x3=dict(
+                    nosteam_executable=False,
+                    executables=dict(((row[0],dict(executable=row[1]))
+                        for row in self.x3tc_executables_treeview.get_model())))
+                if x3tc_savegames_enabled:
+                    if self.x3tc_savegames_backup_enabled:
+                        backupdir=x3tc_savegames_backupdir_filechooserbutton.get_filename() or ''
+                    else:
+                        backupdir=''
+                    x3['savegames']=dict(
+                        directory=x3tc_savegames_dir_filechooserbutton.get_filename(),
+                        workdir=x3tc_savegames_workdir_filechooserbutton.get_filename(),
+                        backup_enabled=self.x3tc_savegames_backup_enabled,
+                        backupdir=backupdir)
+                else:
+                    x3['savegames']={}
+                conf['x3tc']=x3
+            
+            if self.x3ap_enabled:
+                x3=dict(
+                    nosteam=True,
+                    executables=dict(((row[0],dict(executable=row[1],nosteam=row[2] or ''))
+                        for row in self.x3ap_executables_treeview.get_model())))
+                if self.x3ap_savegames_enabled:
+                    if self.x3ap_savegames_backup_enabled:
+                        backupdir=x3ap_savegames_backupdir_filechooserbutton.get_filename() or ''
+                    else:
+                        backupdir=''
+                    x3['savegames']=dict(
+                        directory=x3ap_savegames_dir_filechooserbutton.get_filename(),
+                        workdir=x3ap_savegames_workdir_filechooserbutton.get_filename(),
+                        backup_enabled=self.x3ap_savegames_backup_enabled,
+                        backupdir=backupdir)
+                else:
+                    x3['savegames']={}
+                conf['x3ap']=x3
+        # conf
 
     def on_assistant_cancel(self,assistant):
         exit()
@@ -458,7 +472,7 @@ class FirstRunAssistant_GUI(object):
         if dialog.run() == Gtk.ResponseType.APPLY:
             row=self.x3ap_executables_liststore.append()
             self.x3ap_executables_liststore[row][0]=dialog.name_entry.get_text()
-            #self.x3ap_executables_liststore[row][1]=dialog.executable_filechooserbutton.get_filename()
+            #self.x3ap_executables_liststore[row][1]=dialog.nosteam_executable_filechooserbutton.get_filename()
             self.x3ap_executables_treeview.show()
         dialog.hide()
         dialog.destroy()
@@ -524,9 +538,7 @@ class FirstRunAssistant_GUI(object):
         
     def on_x3tc_savegames_backup_checkbutton_toggled(self,checkbutton):
         self.x3tc_savegames_backupdir_label.set_sensitive(checkbutton.get_active())
-        self.x3tc_savegames_backupdir_filechooserbutton.set_sensivitive(checkbutton.get_active())
-    
-    
+        self.x3tc_savegames_backupdir_filechooserbutton.set_sensivitive(checkbutton.get_active())    
     
     
 def FirstRunAssistant(parent=None,exit_on_cancel=False):
