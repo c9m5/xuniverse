@@ -429,16 +429,17 @@ class FirstRunAssistant_GUI(object):
         if self.x3ap_enabled:
             x3=dict(
                 nosteam=True,
-                executables(((row[0],dict(executable=row[1],nosteam=row[2] or ''))
-                    for row in self.x3ap_executables_treeview.getmodel())))
-            if x3ap_savegames_enabled:
+                executables=dict(((row[0],dict(executable=row[1],
+                                          nosteam=row[2] or ''))
+                    for row in self.x3ap_executables_treeview.get_model())))
+            if self.x3ap_savegames_enabled:
                 pass
             else:
                 x3['savegames']=None
             cfg['x3ap']=x3
 
     def on_assistant_cancel(self,assistant):
-        pass
+        exit()
 
     def on_assistant_close(self,assistant):
         pass
@@ -453,7 +454,31 @@ class FirstRunAssistant_GUI(object):
         pass
 
     def on_x3ap_executables_add_toolbutton_clicked(self,button):
-        pass
+        dialog=SelectExecutableDialogX3AP(self.assistant)
+        if dialog.run() == Gtk.ResponseType.APPLY:
+            row=self.x3ap_executables_liststore.append()
+            self.x3ap_executables_liststore[row][0]=dialog.name_entry.get_text()
+            #self.x3ap_executables_liststore[row][1]=dialog.executable_filechooserbutton.get_filename()
+            self.x3ap_executables_treeview.show()
+        dialog.hide()
+        dialog.destroy()
+
+    def on_x3ap_executables_edit_toolbutton_clicked(self,button):
+        model,row=self.x3ap_executables_treeview.get_selection().get_selected()
+        dialog=SelectExecutableDialogX3AP(self.assistant,model.get_value(row,0),model.get_value(row,1))
+        if dialog.run() == Gtk.ResponseType.APPLY:
+            row=self.x3ap_executables_liststore.append()
+            self.x3ap_executables_liststore[row][0]=dialog.name_entry.get_text()
+            #self.x3ap_executables_liststore[row][1]=dialog.executable_filechooserbutton.get_filename()
+            self.x3ap_executables_treeview.show()
+        dialog.hide()
+        dialog.destroy()
+        
+    def on_x3ap_executables_remove_toolbutton_clicked(self,button):
+        model,row=self.x3ap_executables_treeview.get_selection().get_selected()
+        dialog=RemoveExecutableDialog(self,model.get_value(row,1))
+        dialog.hide()
+        dialog.destroy()
 
     def on_x3tc_executables_add_toolbutton_clicked(self,button):
         dialog=SelectExecutableDialogX3TC(self.assistant)
@@ -479,6 +504,10 @@ class FirstRunAssistant_GUI(object):
     def on_x3tc_executables_remove_toolbutton_clicked(self,button):
         model,row=self.x3tc_executables_treeview.get_selection().get_selected()
         dialog=RemoveExecutableDialog(self,model.get_value(row,1))
+        if dialog.run() == Gtk.ResponseType.YES:
+            pass
+        dialog.hide()
+        dialog.destroy()
 
     def on_x3tc_executables_treeview_selection_changed(self,selection):
         model,iter=selection.get_selected()
@@ -497,7 +526,9 @@ class FirstRunAssistant_GUI(object):
         self.x3tc_savegames_backupdir_label.set_sensitive(checkbutton.get_active())
         self.x3tc_savegames_backupdir_filechooserbutton.set_sensivitive(checkbutton.get_active())
     
-
+    
+    
+    
 def FirstRunAssistant(parent=None,exit_on_cancel=False):
     return FirstRunAssistant_GUI(exit_on_cancel=exit_on_cancel).assistant
 
