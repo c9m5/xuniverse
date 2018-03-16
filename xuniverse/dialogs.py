@@ -126,6 +126,16 @@ def SelectExecutableDialogX3TC(parent=None,name='default',executable=None):
     return SelectExecutableDialogX3TC_GUI(parent=parent,name=name,executable=executable).dialog
 
 ################################################################################
+class SelectExecutableDialogX3AP_GUI(object):
+    _OBJECTS_={
+        'dialog':'SelectExecutableDialogX3AP'}
+    def __init__(self):
+        pass
+
+def SelectExecutableDialogX3AP(parent=None,name='default',executable=None,nosteam=None):
+    return SelectExecutableDialogX3AP_GUI
+
+################################################################################
 
 class RemoveExecutableDialog_GUI(object):
     _OBJECTS_={
